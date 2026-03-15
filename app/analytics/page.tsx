@@ -97,7 +97,7 @@ export default function AnalyticsPage() {
             <Tooltip
               contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: 8 }}
               labelStyle={{ color: "#e5e7eb" }}
-              formatter={(v: number) => formatMXN(v)}
+              formatter={(v: unknown) => formatMXN(v as number)}
             />
             <Legend wrapperStyle={{ fontSize: 12, color: "#9ca3af" }} />
             <Bar dataKey="income" name="Ingresos" fill="#22c55e" radius={[4, 4, 0, 0]} />
@@ -117,7 +117,7 @@ export default function AnalyticsPage() {
               <YAxis tick={{ fill: "#9ca3af", fontSize: 11 }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} />
               <Tooltip
                 contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: 8 }}
-                formatter={(v: number) => formatMXN(v)}
+                formatter={(v: unknown) => formatMXN(v as number)}
               />
               <Line
                 type="monotone"
@@ -155,7 +155,7 @@ export default function AnalyticsPage() {
                   </Pie>
                   <Tooltip
                     contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: 8 }}
-                    formatter={(v: number) => formatMXN(v)}
+                    formatter={(v: unknown) => formatMXN(v as number)}
                   />
                 </PieChart>
               </ResponsiveContainer>

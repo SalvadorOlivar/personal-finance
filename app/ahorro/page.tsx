@@ -340,7 +340,7 @@ export default function AhorroPage() {
               <YAxis tick={{ fill: "#9ca3af", fontSize: 11 }} tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}k`} />
               <Tooltip
                 contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: 8 }}
-                formatter={(v: number) => [formatMXN(v), "Saldo"]}
+                formatter={(v: unknown) => [formatMXN(v as number), "Saldo"]}
               />
               <Area type="monotone" dataKey="balance" stroke="#10b981" fill="url(#balGrad)" strokeWidth={2} dot={false} />
             </AreaChart>
