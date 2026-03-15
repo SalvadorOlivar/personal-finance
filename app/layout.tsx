@@ -7,8 +7,14 @@ import Providers from "@/components/Providers";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gastos Personales",
+  title: "MisGastos",
   description: "Control de gastos e ingresos personales",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "MisGastos",
+  },
 };
 
 export default function RootLayout({
