@@ -224,7 +224,7 @@ export default function TransaccionesPage() {
             </div>
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-x-auto">
             {transactions.length === 0 ? (
               <div className="text-center py-16 text-gray-500">
                 <p className="text-4xl mb-3">📭</p>

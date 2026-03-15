@@ -44,7 +44,7 @@ export default function AnalyticsPage() {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-5">
         <h1 className="text-2xl font-bold text-white">Analytics</h1>
         <div className="flex gap-1">
           {[3, 6, 12].map(m => (
@@ -89,7 +89,7 @@ export default function AnalyticsPage() {
       {/* Gráfica de tendencia (barras) */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-5 mb-6">
         <h2 className="font-semibold text-white mb-4">Ingresos vs Gastos por mes</h2>
-        <ResponsiveContainer width="100%" height={260}>
+        <ResponsiveContainer width="100%" height={220}>
           <BarChart data={data?.monthlyTrend ?? []} barCategoryGap="25%">
             <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
             <XAxis dataKey="label" tick={{ fill: "#9ca3af", fontSize: 12 }} />
@@ -137,29 +137,31 @@ export default function AnalyticsPage() {
           {(data?.categoryBreakdown ?? []).length === 0 ? (
             <div className="flex items-center justify-center h-48 text-gray-500 text-sm">Sin datos este mes</div>
           ) : (
-            <div className="flex items-center gap-4">
-              <ResponsiveContainer width="50%" height={180}>
-                <PieChart>
-                  <Pie
-                    data={data?.categoryBreakdown ?? []}
-                    dataKey="total"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={45}
-                    outerRadius={80}
-                  >
-                    {(data?.categoryBreakdown ?? []).map((entry, i) => (
-                      <Cell key={i} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: 8 }}
-                    formatter={(v: unknown) => formatMXN(v as number)}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="w-full sm:w-1/2 shrink-0">
+                <ResponsiveContainer width="100%" height={160}>
+                  <PieChart>
+                    <Pie
+                      data={data?.categoryBreakdown ?? []}
+                      dataKey="total"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                    >
+                      {(data?.categoryBreakdown ?? []).map((entry, i) => (
+                        <Cell key={i} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151", borderRadius: 8 }}
+                      formatter={(v: unknown) => formatMXN(v as number)}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex flex-col gap-1.5 w-full min-w-0">
                 {(data?.categoryBreakdown ?? []).slice(0, 6).map((cat) => (
                   <div key={cat.name} className="flex items-center gap-2 text-xs">
                     <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color }} />
