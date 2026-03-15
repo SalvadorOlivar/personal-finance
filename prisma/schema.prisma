@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  image     String?
+  createdAt DateTime @default(now())
+  lastLogin DateTime @default(now())
+}
+
+model Category {
+  id            String         @id @default(cuid())
+  name          String
+  icon          String
+  color         String
+  type          String
+  transactions  Transaction[]
+  fixedExpenses FixedExpense[]
+  createdAt     DateTime       @default(now())
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  amount      Float
+  description String
+  date        DateTime
+  type        String
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  notes           String?
+  fixedExpenseId  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model SavingsGoal {
+  id           String               @id @default(cuid())
+  name         String
+  targetAmount Float
+  icon         String               @default("🎯")
+  color        String               @default("#6366f1")
+  completed    Boolean              @default(false)
+  createdAt    DateTime             @default(now())
+  transactions SavingsTransaction[]
+}
+
+model SavingsTransaction {
+  id        String       @id @default(cuid())
+  amount    Float
+  type      String       @default("deposit")
+  date      DateTime
+  notes     String?
+  goalId    String?
+  goal      SavingsGoal? @relation(fields: [goalId], references: [id])
+  createdAt DateTime     @default(now())
+}
+
+model SavingsConfig {
+  id             String @id @default("default")
+  minimumBalance Float  @default(0)
+}
+
+model FixedExpense {
+  id         String   @id @default(cuid())
+  name       String
+  amount     Float
+  icon       String   @default("📌")
+  color      String   @default("#6366f1")
+  active     Boolean  @default(true)
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model PendingExpense {
+  id          String    @id @default(cuid())
+  title       String
+  amount      Float?
+  notes       String?
+  priority    String    @default("medium")
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+}

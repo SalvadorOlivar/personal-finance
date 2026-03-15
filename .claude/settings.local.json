@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma migrate dev --name init)",
+      "Bash(node -e \"const { createClient } = require\\(''@libsql/client''\\); const c = createClient\\({ url: ''file:C:/GIT/gastos/prisma/dev.db'' }\\); console.log\\(''ok''\\); c.close\\(\\);\")",
+      "Bash(curl -s http://localhost:3000/api/savings/goals)",
+      "Bash(npx prisma migrate dev --name add-pending-expenses)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
